@@ -10,13 +10,17 @@ namespace Game1
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+
+        GameModel gameModel;
+        GameView gameView;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = false;
+            gameModel = new GameModel();
+
         }
 
         /// <summary>
@@ -39,7 +43,9 @@ namespace Game1
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+
+            gameView = new GameView(gameModel, Content, GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -60,8 +66,9 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) { 
                 Exit();
+            }
 
             // TODO: Add your update logic here
 
@@ -75,9 +82,8 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
-
+            this.gameView.DrawGame();
             base.Draw(gameTime);
         }
     }
