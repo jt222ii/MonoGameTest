@@ -1,3 +1,2 @@
 # MonoGameTest
-test
-a
+Testar monogame efter föreläsningen
